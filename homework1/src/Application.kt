@@ -17,20 +17,6 @@ fun main(args: Array<String>): Unit {
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
     routing {
-
-//        this.get("/ClaimService/add"){
-//        println("HTTP message is using GET method with /get ")
-//        val id = UUID.randomUUID().toString()
-//        val title = call.request.queryParameters["Title"]
-//        val date = call.request.queryParameters["Date"]
-//        val isSolved = false
-//        val response = String.format("id: %s title: %s date %s isSolved ", fn, ln)
-//        //
-//        val pObj = Claim(fn, ln, sn)
-//        val dao = PersonDao().addPerson(pObj)
-//        call.respondText(response, status= HttpStatusCode.OK, contentType = ContentType.Text.Plain)
-//        }
-
         get("/ClaimService/getAll") {
             val CList = ClaimDao().getAll()
             // JSON Serialization/Deserialization
@@ -40,12 +26,11 @@ fun Application.module(testing: Boolean = false) {
 
         post("/ClaimService/add") {
             println("HTTP message is using GET method with /get ")
-            val id = UUID.randomUUID().toString()
+            val id = UUID.randomUUID()
             val title = call.request.queryParameters["Title"]
             val date = call.request.queryParameters["Date"]
-            val isSolved = 0
+            val isSolved = false
             val response = String.format("Claim was added")
-            //
             val cObj = Claim(id, title!!, date!!, isSolved)
             val dao = ClaimDao().addClaim(cObj)
             call.respondText(response, status = HttpStatusCode.OK, contentType = ContentType.Text.Plain)
