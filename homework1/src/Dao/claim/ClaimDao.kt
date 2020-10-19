@@ -2,6 +2,7 @@ package com.homework1.Dao.Claim
 
 import com.homework1.Dao.Dao
 import com.homework1.Dao.Database
+import java.util.*
 
 class ClaimDao : Dao() {
 
@@ -33,8 +34,8 @@ class ClaimDao : Dao() {
             val id = st.columnString(0)
             val title = st.columnString(1)
             val date = st.columnString(2)
-            val solved = st.columnInt(3)
-            claimList.add(Claim(id, title, date, solved))
+            val solved = st.columnNull(3)
+            claimList.add(Claim(UUID.fromString(id), title, date, solved))
         }
         return claimList
     }
